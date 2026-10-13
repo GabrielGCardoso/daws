@@ -3,7 +3,9 @@
     "image": "mcr.microsoft.com/devcontainers/base:latest",
     "features": {
         "ghcr.io/dlouwers/devcontainer-features/devbox:1": {},
-        "ghcr.io/devcontainers/features/docker-in-docker:4": {}
+        "ghcr.io/devcontainers/features/docker-in-docker:4": {
+            "moby": false
+        }
     },
     "postCreateCommand": "devbox install"
 }
