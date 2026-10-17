@@ -47,6 +47,18 @@ FILE_NAME=$(basename "$1")
 PUBLIC_URL="https://$BUCKET_NAME.s3.amazonaws.com/$FILE_NAME"
 echo "Public URL: $PUBLIC_URL"
 
+# === output example ===
+# gabriel in daws/exercises/s3-simple/bash on  main [!+] took 8,2s 
+# ❯ ./main.sh image.png
+# Creating bucket: daws-s3-simple-20261013
+# upload: ./image.png to s3://daws-s3-simple-20261013/image.png       
+# upload: ./image.png to s3://daws-s3-simple-20261013/image.png     
+# File 'image.png' uploaded successfully to 's3://daws-s3-simple-20261013/'
+# Public URL: https://daws-s3-simple-20261013.s3.amazonaws.com/image.png
+# gabriel in daws/exercises/s3-simple/bash on  main [!+] took 11,2s 
+# ❯ 
+
+
 # 1. Publish cost
 # 604 KB = 0.0005903244 GB
 # Storage: 0.0005903244 GB * $0.023 = $0.0000136
