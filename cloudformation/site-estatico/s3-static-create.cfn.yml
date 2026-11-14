@@ -1,0 +1,148 @@
+# aws cloudformation create-stack --stack-name site-estatico --template-body file://s3-static-create.cfn.yml
+# {
+#     "StackId": "arn:aws:cloudformation:us-east-1:952499956678:stack/site-estatico/96208410-e068-11f1-80fe-12ffe0d6bd8b",
+#     "OperationId": "9621e3a0-e068-11f1-80fe-12ffe0d6bd8b"
+# }
+
+# aws cloudformation describe-stacks --stack-name site-estatico --query "Stacks[0].Outputs"
+# [
+#     {
+#         "OutputKey": "BucketName",
+#         "OutputValue": "site-estatico-websitebucket-mnmjhdazedoq",
+#         "Description": "The name of the website bucket"
+#     },
+#     {
+#         "OutputKey": "WebsiteUrl",
+#         "OutputValue": "http://site-estatico-websitebucket-mnmjhdazedoq.s3-website-us-east-1.amazonaws.com",
+#         "Description": "The URL of the website"
+#     }
+# ]
+
+# aws s3 sync icdb-static-sv/build s3://site-estatico-websitebucket-mnmjhdazedoq --delete
+#
+# ❯ aws s3 sync icdb-static-sv/build s3://site-estatico-websitebucket-mnmjhdazedoq --delete
+# upload: icdb-static-sv/build/_app/immutable/assets/0.nj9cReRr.css to s3://site-estatico-websitebucket-mnmjhdazedoq/_app/immutable/assets/0.nj9cReRr.css
+# upload: icdb-static-sv/build/_app/immutable/chunks/CgEG55u3.js to s3://site-estatico-websitebucket-mnmjhdazedoq/_app/immutable/chunks/CgEG55u3.js
+# upload: icdb-static-sv/build/_app/immutable/assets/5.Bhg1tJS5.css to s3://site-estatico-websitebucket-mnmjhdazedoq/_app/immutable/assets/5.Bhg1tJS5.css
+# upload: icdb-static-sv/build/_app/immutable/assets/2.DNg8oXY6.css to s3://site-estatico-websitebucket-mnmjhdazedoq/_app/immutable/assets/2.DNg8oXY6.css
+# upload: icdb-static-sv/build/_app/immutable/chunks/BuFlayix.js to s3://site-estatico-websitebucket-mnmjhdazedoq/_app/immutable/chunks/BuFlayix.js
+# upload: icdb-static-sv/build/_app/immutable/chunks/Bjy-W4x2.js to s3://site-estatico-websitebucket-mnmjhdazedoq/_app/immutable/chunks/Bjy-W4x2.js
+# upload: icdb-static-sv/build/_app/immutable/assets/3.Dagf7uem.css to s3://site-estatico-websitebucket-mnmjhdazedoq/_app/immutable/assets/3.Dagf7uem.css
+# upload: icdb-static-sv/build/_app/immutable/chunks/D01tAkSV.js to s3://site-estatico-websitebucket-mnmjhdazedoq/_app/immutable/chunks/D01tAkSV.js
+# upload: icdb-static-sv/build/_app/immutable/chunks/D58vaVqX.js to s3://site-estatico-websitebucket-mnmjhdazedoq/_app/immutable/chunks/D58vaVqX.js
+# upload: icdb-static-sv/build/_app/immutable/assets/7.CCCwPHg-.css to s3://site-estatico-websitebucket-mnmjhdazedoq/_app/immutable/assets/7.CCCwPHg-.css
+# upload: icdb-static-sv/build/_app/immutable/assets/Comments.Dy8_q7KE.css to s3://site-estatico-websitebucket-mnmjhdazedoq/_app/immutable/assets/Comments.Dy8_q7KE.css
+# upload: icdb-static-sv/build/_app/immutable/chunks/DsC71hw9.js to s3://site-estatico-websitebucket-mnmjhdazedoq/_app/immutable/chunks/DsC71hw9.js
+# upload: icdb-static-sv/build/_app/immutable/chunks/xihTtKlq.js to s3://site-estatico-websitebucket-mnmjhdazedoq/_app/immutable/chunks/xihTtKlq.js
+# upload: icdb-static-sv/build/_app/immutable/chunks/a8yWZEQo.js to s3://site-estatico-websitebucket-mnmjhdazedoq/_app/immutable/chunks/a8yWZEQo.js
+# upload: icdb-static-sv/build/_app/immutable/entry/app.Di8cDHbI.js to s3://site-estatico-websitebucket-mnmjhdazedoq/_app/immutable/entry/app.Di8cDHbI.js
+# upload: icdb-static-sv/build/_app/immutable/chunks/DcxhwiCi.js to s3://site-estatico-websitebucket-mnmjhdazedoq/_app/immutable/chunks/DcxhwiCi.js
+# upload: icdb-static-sv/build/_app/immutable/entry/start.CfwsiaUS.js to s3://site-estatico-websitebucket-mnmjhdazedoq/_app/immutable/entry/start.CfwsiaUS.js
+# upload: icdb-static-sv/build/_app/immutable/nodes/0.CgqaKH-v.js to s3://site-estatico-websitebucket-mnmjhdazedoq/_app/immutable/nodes/0.CgqaKH-v.js
+# upload: icdb-static-sv/build/_app/immutable/nodes/1.ByKTEENx.js to s3://site-estatico-websitebucket-mnmjhdazedoq/_app/immutable/nodes/1.ByKTEENx.js
+# upload: icdb-static-sv/build/_app/immutable/nodes/2.BoFsA2sU.js to s3://site-estatico-websitebucket-mnmjhdazedoq/_app/immutable/nodes/2.BoFsA2sU.js
+# upload: icdb-static-sv/build/_app/immutable/nodes/3.Dm3WX6q6.js to s3://site-estatico-websitebucket-mnmjhdazedoq/_app/immutable/nodes/3.Dm3WX6q6.js
+# upload: icdb-static-sv/build/_app/immutable/nodes/5.AcMKjv91.js to s3://site-estatico-websitebucket-mnmjhdazedoq/_app/immutable/nodes/5.AcMKjv91.js
+# upload: icdb-static-sv/build/_app/immutable/nodes/4.DGKWi-rX.js to s3://site-estatico-websitebucket-mnmjhdazedoq/_app/immutable/nodes/4.DGKWi-rX.js
+# upload: icdb-static-sv/build/_app/immutable/chunks/i2kSvqW6.js to s3://site-estatico-websitebucket-mnmjhdazedoq/_app/immutable/chunks/i2kSvqW6.js
+# upload: icdb-static-sv/build/_app/immutable/nodes/7.BjXudqjt.js to s3://site-estatico-websitebucket-mnmjhdazedoq/_app/immutable/nodes/7.BjXudqjt.js
+# upload: icdb-static-sv/build/_app/immutable/nodes/6.BJ9qlkIX.js to s3://site-estatico-websitebucket-mnmjhdazedoq/_app/immutable/nodes/6.BJ9qlkIX.js
+# upload: icdb-static-sv/build/_app/version.json to s3://site-estatico-websitebucket-mnmjhdazedoq/_app/version.json
+# upload: icdb-static-sv/build/about/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/about/index.html
+# upload: icdb-static-sv/build/cats/colonel-meow/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/cats/colonel-meow/index.html
+# upload: icdb-static-sv/build/cats/didga/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/cats/didga/index.html
+# upload: icdb-static-sv/build/cats/happy-cat/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/cats/happy-cat/index.html
+# upload: icdb-static-sv/build/cats/grumpy-cat/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/cats/grumpy-cat/index.html
+# upload: icdb-static-sv/build/cats/henri/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/cats/henri/index.html
+# upload: icdb-static-sv/build/cats/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/cats/index.html
+# upload: icdb-static-sv/build/cats/keyboard-cat/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/cats/keyboard-cat/index.html
+# upload: icdb-static-sv/build/cats/lil-bub/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/cats/lil-bub/index.html
+# upload: icdb-static-sv/build/cats/nala-cat/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/cats/nala-cat/index.html
+# upload: icdb-static-sv/build/cats/maru/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/cats/maru/index.html
+# upload: icdb-static-sv/build/cats/nyan-cat/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/cats/nyan-cat/index.html
+# upload: icdb-static-sv/build/cats/owlkitty/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/cats/owlkitty/index.html
+# upload: icdb-static-sv/build/cats/stepan/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/cats/stepan/index.html
+# upload: icdb-static-sv/build/cats/smudge/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/cats/smudge/index.html
+# upload: icdb-static-sv/build/cats/thurston-waffles/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/cats/thurston-waffles/index.html
+# upload: icdb-static-sv/build/images/cats/CREDITS.md to s3://site-estatico-websitebucket-mnmjhdazedoq/images/cats/CREDITS.md
+# upload: icdb-static-sv/build/images/cats/colonel-meow.jpg to s3://site-estatico-websitebucket-mnmjhdazedoq/images/cats/colonel-meow.jpg
+# upload: icdb-static-sv/build/images/cats/lil-bub.jpg to s3://site-estatico-websitebucket-mnmjhdazedoq/images/cats/lil-bub.jpg
+# upload: icdb-static-sv/build/images/cats/didga.jpg to s3://site-estatico-websitebucket-mnmjhdazedoq/images/cats/didga.jpg
+# upload: icdb-static-sv/build/images/cats/nala-cat.jpg to s3://site-estatico-websitebucket-mnmjhdazedoq/images/cats/nala-cat.jpg
+# upload: icdb-static-sv/build/images/cats/nyan-cat.jpg to s3://site-estatico-websitebucket-mnmjhdazedoq/images/cats/nyan-cat.jpg
+# upload: icdb-static-sv/build/images/cats/owlkitty.jpg to s3://site-estatico-websitebucket-mnmjhdazedoq/images/cats/owlkitty.jpg
+# upload: icdb-static-sv/build/images/cats/happy-cat.jpg to s3://site-estatico-websitebucket-mnmjhdazedoq/images/cats/happy-cat.jpg
+# upload: icdb-static-sv/build/images/cats/grumpy-cat.jpg to s3://site-estatico-websitebucket-mnmjhdazedoq/images/cats/grumpy-cat.jpg
+# upload: icdb-static-sv/build/images/cats/henri.jpg to s3://site-estatico-websitebucket-mnmjhdazedoq/images/cats/henri.jpg
+# upload: icdb-static-sv/build/images/cats/maru.jpg to s3://site-estatico-websitebucket-mnmjhdazedoq/images/cats/maru.jpg
+# upload: icdb-static-sv/build/images/cats/stepan.jpg to s3://site-estatico-websitebucket-mnmjhdazedoq/images/cats/stepan.jpg
+# upload: icdb-static-sv/build/images/cats/keyboard-cat.jpg to s3://site-estatico-websitebucket-mnmjhdazedoq/images/cats/keyboard-cat.jpg
+# upload: icdb-static-sv/build/robots.txt to s3://site-estatico-websitebucket-mnmjhdazedoq/robots.txt
+# upload: icdb-static-sv/build/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/index.html
+# upload: icdb-static-sv/build/images/cats/thurston-waffles.jpg to s3://site-estatico-websitebucket-mnmjhdazedoq/images/cats/thurston-waffles.jpg
+# upload: icdb-static-sv/build/videos/a-toast-from-stepan/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/videos/a-toast-from-stepan/index.html
+# upload: icdb-static-sv/build/videos/colonel-meow-angriest-cat/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/videos/colonel-meow-angriest-cat/index.html
+# upload: icdb-static-sv/build/images/cats/smudge.jpg to s3://site-estatico-websitebucket-mnmjhdazedoq/images/cats/smudge.jpg
+# upload: icdb-static-sv/build/videos/grumpy-cats-worst-christmas-ever/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/videos/grumpy-cats-worst-christmas-ever/index.html
+# upload: icdb-static-sv/build/videos/go-didga-skateboarding-cat/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/videos/go-didga-skateboarding-cat/index.html
+# upload: icdb-static-sv/build/videos/he-no-like-vegetals/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/videos/he-no-like-vegetals/index.html
+# upload: icdb-static-sv/build/videos/henri-2-paw-de-deux/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/videos/henri-2-paw-de-deux/index.html
+# upload: icdb-static-sv/build/videos/i-am-maru/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/videos/i-am-maru/index.html
+# upload: icdb-static-sv/build/videos/henri-3-le-vet/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/videos/henri-3-le-vet/index.html
+# upload: icdb-static-sv/build/videos/i-can-has-cheezburger/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/videos/i-can-has-cheezburger/index.html
+# upload: icdb-static-sv/build/videos/le-meow/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/videos/le-meow/index.html
+# upload: icdb-static-sv/build/videos/lil-bub-and-friendz/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/videos/lil-bub-and-friendz/index.html
+# upload: icdb-static-sv/build/videos/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/videos/index.html
+# upload: icdb-static-sv/build/videos/keyboard-cat-the-original/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/videos/keyboard-cat-the-original/index.html
+# upload: icdb-static-sv/build/videos/many-too-small-boxes-and-maru/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/videos/many-too-small-boxes-and-maru/index.html
+# upload: icdb-static-sv/build/videos/nyan-cat-10-hours/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/videos/nyan-cat-10-hours/index.html
+# upload: icdb-static-sv/build/videos/the-original-grumpy-cat/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/videos/the-original-grumpy-cat/index.html
+# upload: icdb-static-sv/build/videos/nyan-cat-original/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/videos/nyan-cat-original/index.html
+# upload: icdb-static-sv/build/videos/the-tube-and-maru/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/videos/the-tube-and-maru/index.html
+# upload: icdb-static-sv/build/videos/this-is-nala/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/videos/this-is-nala/index.html
+# upload: icdb-static-sv/build/videos/titanic-with-a-cat/index.html to s3://site-estatico-websitebucket-mnmjhdazedoq/videos/titanic-with-a-cat/index.html
+# gabriel in daws/cloudformation/site-estatico at gabriel-ThinkPad-L14-Gen-2 on  main [?] took 3,7s 
+# ❯    
+#
+# removendo tudo 
+# aws s3 rm s3://site-estatico-websitebucket-mnmjhdazedoq --recursive
+# aws cloudformation delete-stack --stack-name site-estatico
+# aws cloudformation wait stack-delete-complete --stack-name site-estatico
+
+Resources:
+  WebSiteBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: error.html
+      OwnershipControls:
+        Rules:
+        - ObjectOwnership: BucketOwnerPreferred
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
+
+  WebSiteBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref WebSiteBucket
+      PolicyDocument:
+        Statement:
+        - Sid: AllowPublicReadGetObject
+          Effect: Allow
+          Principal: '*'
+          Action:
+          - s3:GetObject
+          Resource:
+          - !Sub '${WebSiteBucket.Arn}/*'
+
+Outputs:
+  BucketName:
+    Description: The name of the website bucket
+    Value: !Ref WebSiteBucket
+  WebsiteUrl:
+    Description: The URL of the website
+    Value: !GetAtt WebSiteBucket.WebsiteURL
