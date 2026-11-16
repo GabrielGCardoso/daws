@@ -7,7 +7,7 @@ sequenceDiagram
     autonumber
     participant Cliente
     participant IGW as Internet Gateway da VPC padrão
-    participant NACL as NACL da subnet padrão
+    participant NACL as NACL padrão da VPC
     participant SG as Security group da stack
     participant EC2 as EC2 python http.server
 
@@ -24,7 +24,9 @@ sequenceDiagram
     IGW-->>Cliente: Resposta com origem no IP público
 ```
 
-O template `ec2.cfn.yml` não escolhe VPC nem subnet. A instância cai na VPC padrão da região do deploy, numa subnet padrão, e ganha um IPv4 público porque essa subnet atribui IP público na criação. SSH na porta 22 segue os mesmos saltos, usando a outra regra do security group.
+O template `ec2.cfn.yml` não cria VPC, subnet nem NACL. A instância cai na VPC padrão da região do deploy, numa das subnets padrão, e ganha um IPv4 público porque essa subnet atribui IP público na criação. SSH na porta 22 segue os mesmos saltos, usando a outra regra do security group.
+
+A VPC é a rede inteira, `172.31.0.0/16`. Uma subnet é um pedaço dessa rede, preso a uma zona de disponibilidade. Na VPC padrão existe uma subnet por zona: em geral faixas `/20`, como `172.31.0.0/20` e `172.31.16.0/20`. A região tem várias zonas, então a VPC padrão tem várias subnets. A EC2 deste script usa só uma delas. A AWS escolhe qual, porque o template não informa `SubnetId`.
 
 ## O que já existe e o que a stack cria
 
@@ -55,7 +57,9 @@ NACL é a lista de controle de acesso da subnet. Ela olha o pacote na entrada e 
 
 Ela é stateless: a resposta precisa de uma regra de saída, além da regra de entrada. Na NACL padrão as duas existem, as duas permitem tudo.
 
-A NACL padrão nasce com a VPC e fica associada a cada subnet até que alguma subnet passe a usar outra NACL. Neste exercício a subnet padrão continua na NACL padrão. Uma NACL customizada valeria só para as subnets associadas a ela, dentro da mesma VPC.
+Neste script existe uma NACL só, a padrão da VPC. Essa mesma lista está associada a todas as subnets da VPC padrão. "Associada a cada subnet" significa que cada subnet aponta para essa lista única, não que cada subnet tenha a sua.
+
+A instância fica em uma subnet, e as outras subnets da mesma VPC continuam de pé, com a mesma NACL, o mesmo Internet Gateway e a mesma route table. Uma NACL criada depois vale só para as subnets que passarem a apontar para ela.
 
 ## Security group
 
