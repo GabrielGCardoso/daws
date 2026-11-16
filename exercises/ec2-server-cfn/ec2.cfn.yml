@@ -1,0 +1,67 @@
+# deploy - create se nao existir, update se existir
+# aws cloudformation deploy --stack-name simple-ec2-python --template-file ec2.cfn.yml
+Description: Simple EC2 instance running Python http.server, serving files from a Github repo downlaod as zip
+
+Parameters:
+  InstanceType:
+    Description: Type of EC2 instance to launch
+    Type: String
+    Default: t2.micro
+
+  KeyName:
+    Description: Name of an existing EC2 KeyPair to enable SSH access
+    Type: AWS::EC2::KeyPair::KeyName
+    Default: "default"
+
+  GithubUser:
+    Description: Github username owning the repository
+    Type: String
+    Default: "GabrielGCardoso"
+
+  GithubRepo:
+    Description: Name of the Github repository
+    Type: String
+    Default: "daws"
+
+Resources:
+  WebServerInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: !Ref InstanceType
+      KeyName: !Ref KeyName
+      ImageId:
+        Fn::Sub: "{{resolve:ssm:/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2}}"
+      SecurityGroupIds:
+        - !Ref InstanceSecurityGroup
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          yum update -y
+          yum install -y unzip python3 wget
+          cd /home/ec2-user
+          wget https://github.com/${GithubUser}/${GithubRepo}/archive/refs/heads/main.zip -O repo.zip
+          unzip repo.zip
+          cd ${GithubRepo}-main/html/simple-html/
+          sudo python3 -m http.server 80 --bind 0.0.0.0 &
+
+  InstanceSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Enable HTTP and SSH access
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+
+Outputs:
+  InstancePublicIp:
+    Description: Public IP address of the EC2 instance
+    Value: !GetAtt WebServerInstance.PublicIp
+  WebURL:
+    Description: URL of the web server
+    Value: !Sub "http://${WebServerInstance.PublicDnsName}"
