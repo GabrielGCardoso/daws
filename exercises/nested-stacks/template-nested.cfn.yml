@@ -1,0 +1,32 @@
+# aws cloudformation package --template-file template-nested.cfn.yml --s3-bucket $BUCKET_NAME --output-template-file package.cfn.yml
+# aws cloudformation deploy --stack-name nested-stacks --template-file package.cfn.yml
+
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Root template for nested stacks VPC and EC2
+
+Parameters:
+  EnvId:
+    Type: String
+    Default: project
+    Description: Environment name tag/prefix
+
+Resources:
+  VPCStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: ./template-vpc-xref.cfn.yml
+      Parameters:
+        Environment: !Ref EnvId
+  EC2Stack:
+    Type: AWS::CloudFormation::Stack
+    DependsOn: VPCStack
+    Properties:
+      TemplateURL: ./template-ec2-xref.cfn.yml
+      Parameters:
+        Environment: !Ref EnvId
+
+Outputs:
+  VPCId:
+    Value: !GetAtt VPCStack.Outputs.VpcId
+  EC2PublicIp:
+    Value: !GetAtt EC2Stack.Outputs.InstancePublicIp

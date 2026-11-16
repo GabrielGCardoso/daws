@@ -1,0 +1,25 @@
+# aws cloudformation create-stack --stack-name infra-backend --template-body file://s3-bucket.cfn.yml
+#
+#
+# {
+#     "StackId": "arn:aws:cloudformation:us-east-1:952499956678:stack/infra-backend/4bf19aa0-e1f8-11f1-8390-0affea1664f5",
+#     "OperationId": "4bf36f60-e1f8-11f1-8390-0affea1664f5"
+# }
+
+# export BUCKET_NAME=$(aws cloudformation describe-stacks --stack-name infra-backend --query 'Stacks[0].Outputs[?OutputKey==`BucketName`].OutputValue' --output text)
+#
+#
+# gabriel in daws/exercises/nested-stacks on  main [?] took 17,2s 
+# ❯ export BUCKET_NAME=$(aws cloudformation describe-stacks --stack-name infra-backend --query 'Stacks[0].Outputs[?OutputKey==`BucketName`].OutputValue' --output text)
+# gabriel in daws/exercises/nested-stacks on  main [?] 
+# ❯ echo $BUCKET_NAME   
+# infra-backend-infrabackendbucket-hash-s3-aqui
+
+Resources:
+  InfraBackendBucket:
+    Type: AWS::S3::Bucket
+
+Outputs:
+  BucketName:
+    Value: !Ref InfraBackendBucket
+    Description: Name of the S3 bucket for storing infrastructure artifacts.
