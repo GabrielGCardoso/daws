@@ -11,7 +11,7 @@ Parameters:
   KeyName:
     Description: Name of an existing EC2 KeyPair to enable SSH access
     Type: AWS::EC2::KeyPair::KeyName
-    Default: "default"
+    Default: "ec2-website-test"
 
   GithubUser:
     Description: Github username owning the repository
@@ -65,3 +65,13 @@ Outputs:
   WebURL:
     Description: URL of the web server
     Value: !Sub "http://${WebServerInstance.PublicDnsName}"
+
+
+## Para o caso de falha
+# aws cloudformation delete-stack --stack-name simple-ec2-python
+# aws cloudformation wait stack-delete-complete --stack-name simple-ec2-python
+# aws cloudformation deploy --stack-name simple-ec2-python --template-file ec2.cfn.yml
+
+# Destruindo a stack depois do teste
+# aws cloudformation delete-stack --stack-name simple-ec2-python
+# aws cloudformation wait stack-delete-complete --stack-name simple-ec2-python
